@@ -1,0 +1,106 @@
+---
+title: "Interpreting Quantitative Findings Report"
+author: '[Your student number here]'
+date: "`r format(Sys.time(), '%d/%m/%y')`"
+output: html_document
+---
+<!-- This is a suggested template to write the summative assignments. Feel free to make changes as appropriate according to the guidance. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+```
+
+```{r preamble, include=FALSE}
+# Load packages
+library(tidyverse)
+library(modelsummary)
+library(broom)
+
+# Read data
+nilt <- readRDS("data/fullnilt_2012.rds")
+```
+
+Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
+<!-- Update the "- 14" in the line above to also take into account your bibliography. For example, if your bibliography is 184 characters then update the above to "- 198". -->
+
+
+## Introduction
+<!-- Word count: approx. 400  -->
+<!-- Look at the model in 'Results and discussion' below. Based on this state a research question and a hypothesis. Remember a hypothesis needs at least two variables. -->
+
+
+## Data and method
+<!-- Word count: approx. 800 -->
+<!-- In this section your goal is to demonstrate that you can describe data and that you understand research design and data collection. -->
+
+
+## Results and discussion
+<!-- Word count: approx. 1300 -->
+<!-- In this section your goal is to demonstrate that you can interpret quantitative results. Additional credit is available if you are able to relate these findings to social science theories or if you can put the findings in context. -->
+
+```{r regression model}
+# This chunk will run the linear regression and create a table for the regression results.
+# Run model
+model <- lm(persinc2 ~ rsex + religcat + orient + uninatid + tunionsa + rsuper + rage, data = nilt)
+
+# Use broom for model fit statistics
+options(modelsummary_get = "broom")
+
+# Create function for formatting numeric values
+f <- function(x) formatC(x, digits = 3, big.mark = ",", format = "f")
+
+# Create formatter for F statistic
+pF <- glance(model)$p.value[[1]]
+starsF <- if (is.na(pF)) "" else if (pF < 0.001) "***" else if (pF < 0.01) "**" else if (pF < 0.05) "*" else ""
+f_star_fmt <- function(x) sprintf("%.3f%s", x, starsF)
+
+# Set names for coefficients
+coef_names <- c(
+  "rsexFemale" = "Sex: Female (ref.: Male)",
+  "religcatProtestant" = "Religion: Protestant (ref.: Catholic)",
+  "religcatNo religion" = "Religion: No religion",
+  "orientI am gay or lesbian (homosexual)" = "Sexual Orientation: Homosexual (ref.: Heterosexual)",
+  "orientI am bi-sexual" = "Sexual Orientation: Bi-sexual",
+  "orientOther" = "Sexual Orientation: Other",
+  "uninatidNationalist" = "Constitutional View: Nationalist (ref.: Unionist)",
+  "uninatidNeither" = "Constitutional view: Neither",
+  "tunionsaNo" = "Trade union membership: No (ref.: Yes)",
+  "rsuperNo" = "Supervisor: No (ref.: Yes)",
+  "rage" = "Age"
+)
+
+# Set names and formatting for model fit statistics to use
+gof_use <- list(
+  list("raw" = "nobs", "clean" = "Observations", "fmt" = 0),
+  list("raw" = "r.squared", "clean" = "R<sup>2</sup>", "fmt" = f),
+  list("raw" = "adj.r.squared", "clean" = "Adjusted R<sup>2</sup>", "fmt" = f),
+  list("raw" = "sigma", "clean" = "Residual Std. Error", "fmt" = f),
+  list("raw" = "statistic", "clean" = "F Statistic", "fmt" = f_star_fmt)
+)
+
+# Show regression results table
+modelsummary(
+  list("Annual Personal Income (GBP)" = model),
+  title = "Regression results",
+  estimate = "{estimate}{stars}<br>({std.error})",
+  statistic = NULL,
+  stars = c("*" = 0.05, "**" = 0.01, "***" = 0.001),
+  fmt = f,
+  coef_rename = coef_names,
+  gof_map = gof_use,
+  notes = "* p < 0.05, ** p < 0.01, *** p < 0.001"
+)
+```
+
+
+## Conclusion
+<!-- Word count: approx. 500 -->
+<!-- Clearly state your findings. Do the findings raise any questions for future research? -->
+
+
+# Reflective Course Summary
+<!-- Word count: approx. 500 -->
+<!-- TODO -->
+
+# Bibliography
+<!-- Include bibliography entries for both the Interpretive Quantitative Findings Report and Reflective Course Summary here. -->
