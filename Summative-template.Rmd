@@ -31,12 +31,12 @@ Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
 
 
 ## Data and method
-<!-- Word count: approx. 800 -->
+<!-- Word count: approx. 600 -->
 <!-- In this section your goal is to demonstrate that you can describe data and that you understand research design and data collection. -->
 
 
 ## Results and discussion
-<!-- Word count: approx. 1300 -->
+<!-- Word count: approx. 1100 -->
 <!-- In this section your goal is to demonstrate that you can interpret quantitative results. Additional credit is available if you are able to relate these findings to social science theories or if you can put the findings in context. -->
 
 ```{r regression model}
@@ -95,13 +95,13 @@ modelsummary(
 
 
 ## Conclusion
-<!-- Word count: approx. 500 -->
+<!-- Word count: approx. 400 -->
 <!-- Clearly state your findings. Do the findings raise any questions for future research? -->
 
 
 # Reflective Course Summary
 <!-- Word count: approx. 500 -->
-<!-- TODO -->
+<!-- Critically reflect on the issues that were most relevant and pertinent to the process of your own learning in the labs. -->
 
 # Bibliography
 <!-- Include bibliography entries for both the Interpretive Quantitative Findings Report and Reflective Course Summary here. -->
