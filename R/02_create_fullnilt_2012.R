@@ -13,13 +13,10 @@
 # 2012 Good relations: ARK. Northern Ireland Life and Times Survey Teaching Dataset 2012, Good relations [computer file]. ARK www.ark.ac.uk/nilt [distributor], March 2014.
 # 2012 LGBT: ARK. Northern Ireland Life and Times Survey Teaching Dataset 2012, LGBT [computer file]. ARK www.ark.ac.uk/teaching [distributor], March 2014.
 
-# Restore renv -------------------------------------------------------------------
+# Packages -------------------------------------------------------------------
 
-# Restore renv
-if (!"renv" %in% installed.packages()[, "Package"]) {
-  install.packages("renv")
-}
-renv::restore()
+# Install tidyverse if needed
+if (!"tidyverse" %in% rownames(installed.packages())) install.packages("tidyverse")
 
 # Load packages
 library(tidyverse)

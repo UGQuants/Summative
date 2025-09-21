@@ -8,6 +8,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+source("R/01_setup.R", local = knitr::knit_global())
 ```
 
 ```{r preamble, include=FALSE}
