@@ -19,6 +19,9 @@ library(broom)
 
 # Read data
 nilt <- readRDS("data/fullnilt_2012.rds")
+
+# Subset with variables used in regression model
+nilt_subset <- select(nilt, persinc2, rsex, religcat, orient, uninatid, tunionsa, rsuper, rage)
 ```
 
 Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
@@ -42,7 +45,7 @@ Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
 ```{r regression model}
 # This chunk will run the linear regression and create a table for the regression results.
 # Run model
-model <- lm(persinc2 ~ rsex + religcat + orient + uninatid + tunionsa + rsuper + rage, data = nilt)
+model <- lm(persinc2 ~ ., data = nilt_subset)
 
 # Use broom for model fit statistics
 options(modelsummary_get = "broom")
