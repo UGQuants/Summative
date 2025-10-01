@@ -21,7 +21,7 @@ library(broom)
 nilt <- readRDS("data/fullnilt_2012.rds")
 
 # Subset with variables used in regression model
-nilt_subset <- select(nilt, persinc2, rsex, religcat, orient, uninatid, tunionsa, rsuper, rage)
+nilt_subset <- nilt |> select(persinc2, rsex, religcat, orient, uninatid, tunionsa, rsuper, rage)
 ```
 
 Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
@@ -29,7 +29,7 @@ Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
 
 
 ## Introduction
-<!-- Word count: approx. 400  -->
+<!-- Word count: approx. 350  -->
 <!-- Look at the model in 'Results and discussion' below. Based on this state a research question and a hypothesis. Remember a hypothesis needs at least two variables. -->
 
 
@@ -39,7 +39,7 @@ Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
 
 
 ## Results and discussion
-<!-- Word count: approx. 1100 -->
+<!-- Word count: approx. 1200 -->
 <!-- In this section your goal is to demonstrate that you can interpret quantitative results. Additional credit is available if you are able to relate these findings to social science theories or if you can put the findings in context. -->
 
 ```{r regression model}
@@ -98,7 +98,7 @@ modelsummary(
 
 
 ## Conclusion
-<!-- Word count: approx. 400 -->
+<!-- Word count: approx. 350 -->
 <!-- Clearly state your findings. Do the findings raise any questions for future research? -->
 
 
