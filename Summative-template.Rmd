@@ -21,7 +21,8 @@ library(broom)
 nilt <- readRDS("data/fullnilt_2012.rds")
 
 # Subset with variables used in regression model
-nilt_subset <- nilt |> select(persinc2, rsex, religcat, orient, uninatid, tunionsa, rsuper, rage)
+nilt_subset <- nilt |>
+  select(persinc2, rsex, religcat, orient, uninatid, tunionsa, rsuper, rage)
 ```
 
 Word count: `r wordcountaddin::word_count("Summative-template.Rmd") - 14`.
